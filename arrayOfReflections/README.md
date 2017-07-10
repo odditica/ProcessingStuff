@@ -1,4 +1,4 @@
-## Array of Reflections
+## Array of Reflections (10/07/2017)
 
 My first attempt at creating a simple reflection shader (GLSL), doesn't utilise a cubemap, there are a couple of magic numbers, but the end result is still interesting.
 
