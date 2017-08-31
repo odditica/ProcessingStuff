@@ -24,11 +24,12 @@ void setup(){
 
 void draw(){
   time = (time + .01) % 1;
-  wave.ellipseMode(CENTER);
+  
   wave.beginDraw();
+  wave.ellipseMode(CENTER);
   wave.background(255);
   wave.fill(0);
-  //wave.noFill();
+  wave.noStroke();
   float gridBlockSize = (float)width / (float)gridSize; 
   for (int yy = 0; yy < gridSize + 2; yy++){
     for (int xx = 0; xx < gridSize + 2; xx++){
@@ -36,8 +37,6 @@ void draw(){
       float origX = (float)xx * gridBlockSize;
       float origY = (float)yy * gridBlockSize;
       float size = (gridBlockSize * .5) * grid[xx][yy];
-      //wave.strokeWeight(1 + grid[xx][yy]);
-      wave.noStroke();
       float vecX = origX - width / 2;
       float vecY = origY - height / 2;
       float len = sqrt(pow(vecX, 2) + pow(vecY, 2));
@@ -82,9 +81,8 @@ void draw(){
     float offset = width / 2 * (1. - (i + time * .2));
     pushMatrix();
     translate(offset, offset);
-   
     scale(i + time * .2);
-    
+  
     beginShape(TRIANGLE_STRIP);
     vertex(c4X, c4Y);
     vertex(c0X, c0Y);
@@ -104,8 +102,9 @@ void draw(){
   rect(0, height - margin, width, margin);
   rect(width - margin, 0, margin, height);
   resetShader();
-  noFill();
-  
+
+  /*
   if (frame < frameLimit)  save("i_(" + str(frame) + ").png");
   frame += 1;
+  */
 }
