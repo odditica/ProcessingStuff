@@ -5,7 +5,7 @@ float cells = 50.;
 
 float lightness(sampler2D s, vec2 coord){
 	vec4 c = texture2D(s, vec2(floor(coord.x * cells) / cells, floor(coord.y * cells) / cells));
-	return (c.r + c.g + c.b) / 3.;
+	return (c.r * 0.3 + c.g * 0.59 + c.b * 0.11);
 }
 
 void main(){
