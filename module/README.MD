@@ -2,4 +2,4 @@
 
 Circular shading!
 
-![](https://github.com/Blokatt/ProcessingStuff/blob/master/pondering/moduleSmall.gif)
+![](https://github.com/Blokatt/ProcessingStuff/blob/master/module/moduleSmall.gif)
