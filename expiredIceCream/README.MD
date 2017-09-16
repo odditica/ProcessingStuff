@@ -2,4 +2,4 @@
 
 My eyes hurt.
 
-![](https://github.com/Blokatt/ProcessingStuff/blob/master/module/expiredSmall.gif)
+![](https://github.com/Blokatt/ProcessingStuff/blob/master/expiredIceCream/expiredSmall.gif)
