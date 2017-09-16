@@ -2,4 +2,6 @@
 
 My eyes hurt.
 
+[Sped-up version](https://github.com/Blokatt/ProcessingStuff/blob/master/expiredIceCream/violentIceCream.gif)
+
 ![](https://github.com/Blokatt/ProcessingStuff/blob/master/expiredIceCream/expiredSmall.gif)
