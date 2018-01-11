@@ -11,7 +11,6 @@ float dither8x8(vec2 position, float brightness) {
 }
 
 void main(){
-
 	dither[0] = 0;
 	dither[1] = 32;
 	dither[2] = 8;
