@@ -11,8 +11,6 @@ uniform float baseres;
 varying vec4 vertColor;
 varying vec4 vertTexCoord;
 
-int dither[64];
-
 float posterise(float value, float level){
 	return floor(value * level) / level;
 }
