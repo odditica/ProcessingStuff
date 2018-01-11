@@ -75,7 +75,7 @@ void main(){
 	dither[61] = 29;
 	dither[62] = 53;
 	dither[63] = 21;
-	
+
 	vec4 col = texture2D(texture, vertTexCoord.xy);
 	col.r *= dither8x8(vec2(gl_FragCoord.x, gl_FragCoord.y), col.r);
 	col.g *= dither8x8(vec2(gl_FragCoord.x, gl_FragCoord.y), col.g);
