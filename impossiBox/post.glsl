@@ -4,10 +4,10 @@ varying vec4 vertTexCoord;
 int dither[64];
 
 float dither8x8(vec2 position, float brightness) {
-    int X = int(mod(position.x, 8.0));
-    int Y = int(mod(position.y, 8.0));
-    float match = float(dither[8 * Y + X]) / 64.;
-    return (brightness) < match ? .75 : 1.;
+	int X = int(mod(position.x, 8.0));
+	int Y = int(mod(position.y, 8.0));
+	float match = float(dither[8 * Y + X]) / 64.;
+	return (brightness) < match ? .75 : 1.;
 }
 
 void main(){
