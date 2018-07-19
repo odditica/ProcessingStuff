@@ -6,15 +6,16 @@
 #define TAU  6.28318530718
 uniform sampler2D charTexture;
 uniform sampler2D screenTexture;
-uniform vec2 charSizePix;
-uniform vec4 resolution;
+uniform vec2 charSizePix; // Cell size in pixels
+uniform vec4 resolution; // X/Y - screen resolution, Z/W - character map resolution
 uniform float time;
 
-vec2 mapSize = vec2((resolution.x / resolution.z) / resolution.x, (resolution.y / resolution.w) / resolution.y);
-vec2 cellResolution = vec2(resolution.x / (charSizePix.x + 1.), resolution.y / charSizePix.y);
-vec2 cellSpace = vec2(charSizePix.xy / resolution.xy);
-float levels = resolution.z / charSizePix.x - 1.;
-float t = TAU * time;
+vec2 mapSize = vec2((resolution.x / resolution.z) / resolution.x, (resolution.y / resolution.w) / resolution.y); //Screen space occupied by the character map
+vec2 cellResolution = vec2(resolution.x / (charSizePix.x + 1.), resolution.y / charSizePix.y);  				 //Screen space resolution in cells 
+vec2 cellSpace = vec2(charSizePix.xy / resolution.xy); 															 //Screen space occupied by a single cell
+
+float levels = resolution.z / charSizePix.x - 1.; //Gradient levels
+float t = TAU * time; //Normalised time unit adjusted for use in trig functions
 int dither[64];
 
 float dither8x8(vec2 position, float col) {	
@@ -94,7 +95,7 @@ float getOffset(float v){
 	return floor(levels * (1. - v));	
 }
 
-float brightness(in vec4 col){	
+float brightness(in vec4 col){		
 	return (col.r * 0.3 + col.g * 0.59 + col.b * 0.11);
 }
 
@@ -102,17 +103,23 @@ vec2 cellFragmentPosition(float offset, vec2 pos) {
 	return vec2((charSizePix.x * getOffset(offset) + mod(pos.x, charSizePix.x + 1.)) * mapSize.x, pos.y * mapSize.y);
 }
 
-vec4 ascii(in vec2 position){		
+vec4 ascii(in vec2 position){	
+	// Cell position within the grid  
 	vec2 cell = vec2(floor(position.x / (charSizePix.x + 1.)), floor(position.y / charSizePix.y));	
+
+	// Character offset of current background cell
 	float offsetPlasma = floor(levels / 2. + sin(length(vec2((cell.xy / cellResolution.xy) - .5)) * 35. - t * 2.) * levels * .442);		
+	
+	// Skull fragment
 	vec4 screenFrag = texture2D(screenTexture, vec2(cell.x / cellResolution.x + cellSpace.x * .5, 1.0 - cell.y / cellResolution.y - cellSpace.y * .5));	
-	////
+	
+	// Main image
 	vec4 plasmaFrag = texture2D(charTexture, cellFragmentPosition(dither8x8(cell, offsetPlasma), position)) *
-											 vec4(.15, .12, 1., .3) * pow(1.275, 1. + (1. - offsetPlasma / levels)) + vec4(.35, .4, 1.8, .1) *
-											 step(1., cell.x) * step(1., cell.y) * (1. - step(cellResolution.x - 2., cell.x)) * (1. - step(cellResolution.y - 1., cell.y));	
+							/*Additional shading*/	 vec4(.15, .12, 1., .3) * pow(1.275, 1. + (1. - offsetPlasma / levels)) + vec4(.35, .4, 1.8, .1) * 
+										/*Border*/   step(1., cell.x) * step(1., cell.y) * (1. - step(cellResolution.x - 2., cell.x)) * (1. - step(cellResolution.y - 1., cell.y));	
 
 	vec4 skullFrag = texture2D(charTexture, cellFragmentPosition(dither8x8(cell, brightness(screenFrag)), position)) *
-											screenFrag * 1.2 * vec4(1., 1.1, 1.4, 1.) + vec4(.42, .24, .8, .5);
+										/*Tint*/	 screenFrag * 1.2 * vec4(1., 1.1, 1.4, 1.) + vec4(.42, .24, .8, .5);
 
 	return mix(plasmaFrag, skullFrag, 1. - step(0., -screenFrag.r));
 } 
