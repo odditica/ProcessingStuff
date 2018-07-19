@@ -14,7 +14,7 @@ PGraphics fntMap;
 PGraphics post;
 PShader shdASCII;
 float time = .25;
-static String strGradient = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?<>i!lI;:,\"^`\'. ";
+static String strGradient = "MQBW#pqmdbX8@O$UZwkh0a&xCfY%LonzucJjvItr}{li?1][<>)(*!;|/\\:,\"^.\'` ";
 static int fntMapCharN = strGradient.length();
 static int fntMapWidth = fntMapCharN * 9;
 static int fntMapHeight = 16;
