@@ -10,6 +10,6 @@ Please ask for permission before releasing remixes of my sketches outside of for
 
 ---
 
-*Jan Vorisek ([@blokatt](https://twitter.com/blokatt), [blokatt.net](https://me.blokatt.net/))*
+*Jan Vorisek ([@odditica](https://twitter.com/odditica), [odditica.fyi](https://odditica.fyi/))*
 
-*19/08/2018*
+*14/08/2021*
